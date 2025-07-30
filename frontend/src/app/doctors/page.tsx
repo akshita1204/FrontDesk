@@ -13,10 +13,17 @@ export default function DoctorsPage() {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/doctors")
-      .then((res) => res.json())
-      .then((data) => setDoctors(data))
-      .catch((err) => console.error("Failed to fetch doctors", err));
+    const fetchDoctors = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/doctors`);
+        const data = await response.json();
+        setDoctors(data);
+      } catch (err) {
+        console.error("Failed to fetch doctors", err);
+      }
+    };
+
+    fetchDoctors();
   }, []);
 
   const today = new Date().toLocaleString("en-US", { weekday: "long" });
@@ -52,7 +59,9 @@ export default function DoctorsPage() {
               <h2 className="text-xl font-semibold text-teal-400 mb-2">
                 {doc.name}
               </h2>
-              <p className="text-gray-300">Specialization: {doc.specialization}</p>
+              <p className="text-gray-300">
+                Specialization: {doc.specialization}
+              </p>
               <p className="text-gray-300">Location: {doc.location}</p>
               <p className={`font-semibold mt-2 ${statusColor}`}>
                 Status: {status}

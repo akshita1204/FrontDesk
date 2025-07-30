@@ -21,16 +21,17 @@ export default function AppointmentManagePage() {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/appointments")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/appointments`)
       .then((res) => res.json())
       .then(setAppointments);
-    fetch("http://localhost:4000/doctors")
+
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/doctors`)
       .then((res) => res.json())
       .then(setDoctors);
   }, []);
 
   const cancelAppointment = async (id: number) => {
-    await fetch(`http://localhost:4000/appointments/${id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/appointments/${id}`, {
       method: "DELETE",
     });
     setAppointments((prev) => prev.filter((a) => a.id !== id));
@@ -72,8 +73,6 @@ export default function AppointmentManagePage() {
           ))}
         </ul>
       )}
-
-      
     </div>
   );
 }

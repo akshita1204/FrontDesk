@@ -23,17 +23,19 @@ export default function QueuePage() {
   const [arrivalTime, setArrivalTime] = useState("");
   const [urgency, setUrgency] = useState<"Normal" | "Urgent">("Normal");
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {
-    fetch("http://localhost:4000/queue")
+    fetch(`${API_URL}/queue`)
       .then((res) => res.json())
       .then(setQueue)
       .catch((err) => console.error("Failed to fetch queue", err));
 
-    fetch("http://localhost:4000/doctors")
+    fetch(`${API_URL}/doctors`)
       .then((res) => res.json())
       .then(setDoctors)
       .catch((err) => console.error("Failed to fetch doctors", err));
-  }, []);
+  }, [API_URL]);
 
   const updateStatus = (id: number, status: string) => {
     setQueue((prev) =>
@@ -48,7 +50,7 @@ export default function QueuePage() {
   };
 
   const removeFromQueue = (id: number) => {
-    fetch(`http://localhost:4000/queue/${id}`, { method: "DELETE" });
+    fetch(`${API_URL}/queue/${id}`, { method: "DELETE" });
     setQueue((prev) => prev.filter((q) => q.id !== id));
   };
 
@@ -62,7 +64,7 @@ export default function QueuePage() {
       doctorId: selectedDoctor,
     };
 
-    const res = await fetch("http://localhost:4000/queue/add", {
+    const res = await fetch(`${API_URL}/queue/add`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newItem),
