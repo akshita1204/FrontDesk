@@ -21,12 +21,6 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
----
-
 ## 📌 About This Project
 
 This project was created as part of an **assignment for AlloHealth**.  
@@ -36,6 +30,3 @@ Key Features:
 - **Modular architecture** with NestJS
 - **Efficient API design** for managing data
 - Built with **TypeScript** for better type safety and maintainability
-
-
-/nestjs/nest/blob/master/LICENSE)
